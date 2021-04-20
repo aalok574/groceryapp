@@ -40,43 +40,44 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ename=(EditText)findViewById(R.id.editTextTextPersonName);
-        epassword=(EditText)findViewById(R.id.editTextTextPassword);
-        elogin=(Button)findViewById(R.id.button);
-        userRegistration=(TextView)findViewById(R.id.textView4);
-        eimage=findViewById(R.id.imageButton);
-        firebaseAuth=FirebaseAuth.getInstance();
+        ename = (EditText) findViewById(R.id.editTextTextPersonName);
+        epassword = (EditText) findViewById(R.id.editTextTextPassword);
+        elogin = (Button) findViewById(R.id.button);
+        userRegistration = (TextView) findViewById(R.id.textView4);
+        eimage = findViewById(R.id.imageButton);
+        firebaseAuth = FirebaseAuth.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user= firebaseAuth.getCurrentUser();
-        if(user!=null)
-        {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
             finish();
-            startActivity(new Intent(MainActivity.this,HomePageActivity.class));
+            startActivity(new Intent(MainActivity.this, HomePageActivity.class));
         }
 
         elogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(ename.getText().toString(),epassword.getText().toString());
+                validate(ename.getText().toString(), epassword.getText().toString());
             }
         });
         userRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             startActivity(new Intent(MainActivity.this,Registerationactivity.class));
+                startActivity(new Intent(MainActivity.this, Registerationactivity.class));
             }
         });
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        eimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
-    }
+
+    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build();
+    mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+ eimage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            signIn();
+        }
+    });
+}
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -95,7 +96,7 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-               Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -119,12 +120,11 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
                     }
                 });
     }
-private void updateUI(FirebaseUser user)
-{
-    Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
-    startActivity(intent);
-}
-
+    private void updateUI(FirebaseUser user)
+    {
+        Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
+        startActivity(intent);
+    }
     private void validate(String name, String password)
     {
         firebaseAuth.signInWithEmailAndPassword(name,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
