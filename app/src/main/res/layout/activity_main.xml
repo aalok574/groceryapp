@@ -61,14 +61,14 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="256dp"
-        android:layout_height="73dp"
+        android:layout_width="279dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.252"
         app:srcCompat="@drawable/download" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

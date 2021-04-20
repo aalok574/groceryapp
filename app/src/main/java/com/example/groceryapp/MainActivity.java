@@ -35,6 +35,7 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private ImageButton eimage;
     private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
         userRegistration=(TextView)findViewById(R.id.textView4);
         eimage=findViewById(R.id.imageButton);
         firebaseAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         FirebaseUser user= firebaseAuth.getCurrentUser();
         if(user!=null)
         {
@@ -68,7 +70,6 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         eimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +101,6 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
     }
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        FirebaseAuth mAuth;
-        mAuth=FirebaseAuth.getInstance();
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
