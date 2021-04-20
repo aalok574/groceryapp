@@ -44,7 +44,6 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
         epassword = (EditText) findViewById(R.id.editTextTextPassword);
         elogin = (Button) findViewById(R.id.button);
         userRegistration = (TextView) findViewById(R.id.textView4);
-        eimage = findViewById(R.id.imageButton);
         firebaseAuth = FirebaseAuth.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -71,12 +70,13 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
             .requestEmail()
             .build();
     mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
- eimage.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            signIn();
-        }
-    });
+        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+
 }
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
