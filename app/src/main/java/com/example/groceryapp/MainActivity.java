@@ -36,6 +36,7 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
     private ImageButton eimage;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    private TextView eotp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
         epassword = (EditText) findViewById(R.id.editTextTextPassword);
         elogin = (Button) findViewById(R.id.button);
         userRegistration = (TextView) findViewById(R.id.textView4);
+        eotp=findViewById(R.id.textView2);
         firebaseAuth = FirebaseAuth.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -62,6 +64,12 @@ public class MainActivity<userpassword, username> extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Registerationactivity.class));
+            }
+        });
+        eotp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Otpactivity.class));
             }
         });
 
