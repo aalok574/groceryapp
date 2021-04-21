@@ -24,6 +24,7 @@ public class Registerationactivity extends AppCompatActivity {
     private Button eregister;
     private TextView login;
     private FirebaseAuth firebaseAuth;
+    private EditText eretypepassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class Registerationactivity extends AppCompatActivity {
         eregname = findViewById(R.id.editTextTextPersonName2);
         eemail = findViewById(R.id.editTextTextEmailAddress);
         eregpassword = findViewById(R.id.editTextTextPassword2);
+        eretypepassword=findViewById(R.id.editTextTextPassword3);
         eregister = findViewById(R.id.button2);
         login = findViewById(R.id.textView3);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -73,6 +75,11 @@ public class Registerationactivity extends AppCompatActivity {
             String regUsername = eregname.getText().toString();
             String regEmail = eemail.getText().toString();
             String regUserPassword = eregpassword.getText().toString();
+            String retypepassword=eretypepassword.getText().toString();
+            if(retypepassword!=regUserPassword)
+            {
+                Toast.makeText(this, "Please re enter the password Correctly ", Toast.LENGTH_SHORT).show();
+            }
             if (regUsername.isEmpty() && regEmail.isEmpty() && regUserPassword.isEmpty()) {
                 Toast.makeText(this, "Please Enter all the details the password should be atleast 8 charcacters", Toast.LENGTH_SHORT).show();
 
